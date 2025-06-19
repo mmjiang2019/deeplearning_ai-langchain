@@ -13,5 +13,5 @@
 # https://github.com/jmorganca/ollama/blob/main/docs/config.md
 # https://github.com/jmorganca/ollama/blob
 
-BASE_URL="http://10.151.149.133:11434/v1/"
+BASE_URL="http://127.0.0.1:11434/v1/"
 API_KEY="ollama"

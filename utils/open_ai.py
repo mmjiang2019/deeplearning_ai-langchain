@@ -2,9 +2,13 @@ import os
 import datetime
 
 import openai
+import tiktoken
 
-from typing import List
+# from typing import List, Tuple
 from dotenv import load_dotenv, find_dotenv
+from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
+
 from lang_chain_project.config import open_ai as open_ai_config
 
 def NewOpenAIClient():
@@ -16,19 +20,18 @@ def NewOpenAIClient():
         )
     return client
 
-def get_llm_model_name() -> str:
-    # Get current date
-    current_date = datetime.datetime.now().date()
+def NewLangChainChatOpenAI(model: str, temperature: float = 0.0):
+     return ChatOpenAI(
+         base_url=get_base_url(),
+         api_key=get_api_key(),
+         temperature=temperature, model=model)
 
-    # Define the date after which the model should be set to "gpt-3.5-turbo"
-    target_date = datetime.date(2024, 6, 12)
-
-    # Set the model variable based on the current date
-    model = "deepseek-r1:1.5b"
-    if current_date <= target_date:
-        model = "qwen3:1.7b"
-    
-    return model
+# useless
+def NewLangChainDeepSeekChat(model: str, temperature: float = 0.0):
+     return ChatDeepSeek(
+         base_url=get_base_url(),
+         api_key=get_api_key(),
+         temperature=temperature, model=model)
 
 def list_models(client: openai.OpenAI):
     return client.models.list()
