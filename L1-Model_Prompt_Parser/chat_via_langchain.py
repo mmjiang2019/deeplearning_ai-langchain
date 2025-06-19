@@ -1,9 +1,13 @@
+import warnings
+
 from langchain_community.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.output_parsers import ResponseSchema
 from langchain.output_parsers import StructuredOutputParser
 
 from lang_chain_project.utils import open_ai
+
+warnings.filterwarnings('ignore')
 
 # Prompts
 template_string = """Translate the text \
@@ -35,10 +39,7 @@ print(customer_messages[0])
 
 # Call the LLM to translate to the style of the customer message
 model = open_ai.get_llm_model_name()
-chat = ChatOpenAI(
-    base_url=open_ai.get_base_url(),
-    api_key=open_ai.get_api_key(),
-    temperature=0, model=model)
+chat = open_ai.NewLangChainChatOpenAI(model=model, temperature=0.0)
 customer_response = chat(customer_messages)
 print(customer_response.content)
 
