@@ -2,10 +2,12 @@ import os
 import datetime
 
 import openai
+import tiktoken
 
-from typing import List
+# from typing import List, Tuple
 from dotenv import load_dotenv, find_dotenv
 from langchain_openai import ChatOpenAI
+from langchain_deepseek import ChatDeepSeek
 
 from lang_chain_project.config import open_ai as open_ai_config
 
@@ -20,6 +22,13 @@ def NewOpenAIClient():
 
 def NewLangChainChatOpenAI(model: str, temperature: float = 0.0):
      return ChatOpenAI(
+         base_url=get_base_url(),
+         api_key=get_api_key(),
+         temperature=temperature, model=model)
+
+# useless
+def NewLangChainDeepSeekChat(model: str, temperature: float = 0.0):
+     return ChatDeepSeek(
          base_url=get_base_url(),
          api_key=get_api_key(),
          temperature=temperature, model=model)

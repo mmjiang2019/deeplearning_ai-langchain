@@ -10,6 +10,8 @@ memory = ConversationTokenBufferMemory(
     verbose=False
     )
 
+# TODO: something is wrong here with conversation token buffer memory, fit it in the future
+# maybe will migrate to langgrah
 memory.save_context({"input": "AI is what?!"},
                     {"output": "Amazing!"})
 memory.save_context({"input": "Backpropagation is what?"},
