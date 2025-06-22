@@ -3,7 +3,7 @@ from langchain.chains import LLMChain, SequentialChain
 from lang_chain_project.utils import data_loader as dl
 from lang_chain_project.utils import open_ai
 
-df = dl.load_csv_data()
+df = dl.load_csv_data_as_pd()
 print(f"data frame head: \n{df.head()}")
 print(f"=================================================================================================")
 
