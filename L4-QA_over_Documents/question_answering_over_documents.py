@@ -57,6 +57,7 @@ qdocs = "".join([docs[i].page_content for i in range(len(docs))])
 response = chat.invoke(f"{qdocs} Question: Please list all your \
 shirts with sun protection in a table in markdown and summarize each one.")
 display(Markdown(response))
+print(f"=================================================================================================")
 
 qa_stuff = RetrievalQA.from_chain_type(
     llm=chat, 
