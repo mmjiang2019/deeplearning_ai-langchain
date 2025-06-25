@@ -6,7 +6,8 @@ import tiktoken
 
 # from typing import List, Tuple
 from dotenv import load_dotenv, find_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings, OpenAI
+
 from langchain_deepseek import ChatDeepSeek
 
 from lang_chain_project.config import open_ai as open_ai_config
@@ -33,6 +34,21 @@ def NewLangChainDeepSeekChat(model: str, temperature: float = 0.0):
          api_key=get_api_key(),
          temperature=temperature, model=model)
 
+def NewEmbeddings(model: str) -> OpenAIEmbeddings:
+    return OpenAIEmbeddings(
+        base_url=get_base_url(),
+        api_key=get_api_key(),
+        model=model,
+        check_embedding_ctx_length=False # check_embedding_ctx_length must be set to False for local testing, otherwise it will fail with a 400 error.
+    )
+
+def NewOpenAI(model: str, temperature: float = 0.0) -> OpenAI:
+    return OpenAI(
+        base_url=get_base_url(),
+        api_key=get_api_key(),
+        model=model,
+        temperature=temperature,
+    )
 def list_models(client: openai.OpenAI):
     return client.models.list()
 
